@@ -12,9 +12,6 @@ public class FlightsercherApplication {
     }
 
 
-    @GetMapping("/hello")
-    public  String sayHello(){
-        return "hello" ;
-    }
+
 
 }
