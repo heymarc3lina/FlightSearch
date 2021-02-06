@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to flight section.</title>
+</head>
+<body>
+<h1>Here you can choose what you want to see</h1>
+<form action="chosenFlights" method="get">
+    <p>If you want to see only chosen flight fill in this short form.</p>
+
+    <label for="arrival">Arrival:</label><br>
+    <input type="text" id="arrival" name="arrival"><br>
+    <label for="departure">Departure:</label><br>
+    <input type="text" id="departure" name="departure"><br><br>
+    <input type="submit" onclick="location.href='/flightSection/chosenFlights' "value="Submit">
+</form>
+<br>
+<form action="flights" method="get">
+    <p>If you want to see all flight click this button.</p>
+    <input type="submit" onclick="location.href='/flightSection/flights'" value="Show all flights">
+</form>
+</body>
+</html>
