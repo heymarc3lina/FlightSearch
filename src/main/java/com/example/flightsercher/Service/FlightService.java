@@ -5,6 +5,7 @@ import com.example.flightsercher.Repository.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,6 +21,11 @@ public class FlightService {
     public List<Flight> list(){
         return flightRepository.findAll();
     }
+//    public List<Flight> listForChosen(String arrival, String departure){
+//        List<Flight> chosenFlight = new ArrayList<>();
+//        for(Flight flight : )
+//
+//    }
 
 
 
