@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AddNewFlight</title>
+    <h2>Adding new flight</h2>
+    <form action="/addingNewFlight" method="post">
+        <label for="arrival">Arrival:</label><br>
+        <input type="text" id="arrival" name="arrival" ><br>
+        <label for="departure">Departure:</label><br>
+        <input type="text" id="departure" name="departure" ><br>
+        <label for="price">Price:</label><br>
+        <input type="text" id="price" name="price" ><br>
+        <label for="flightTime">Flight time:</label><br>
+        <input type="text" id="flightTime" name="flightTime" ><br><br>
+        <input type="submit" value="Submit" >
+    </form>
+    <br>
+    <form action="flights" method="get">
+        <p>If you want to go to flights click this button</p>
+        <input type="submit" onclick="location.href='/flightSection/flights'" value="Show all flights">
+    </form>
+</head>
+<body>
+
+</body>
+</html>

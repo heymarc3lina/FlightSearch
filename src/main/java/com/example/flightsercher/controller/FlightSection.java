@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,13 +38,26 @@ public class FlightSection {
     public String listForChosen(@RequestParam String arrival, @RequestParam String departure, Model model ){
         List<Flight>  chosenFlightList = new ArrayList<>();
         for(Flight flight : flightService.list()){
-            if(flight.getArrival().equals(arrival) && flight.getDeparture().equals(departure)){
+            if(flight.getArrival().equalsIgnoreCase(arrival) && flight.getDeparture().equalsIgnoreCase(departure)){
                 chosenFlightList.add(flight);
             }
         }
 
         model.addAttribute("flights", chosenFlightList);
         return "flights";
+    }
+
+    @GetMapping("/addNewFlight")
+    public  String addNewFlight(){
+        return "addNewFlight";
+    }
+
+    @PostMapping("/addingNewFlight")
+    public String addFlight(@RequestParam String arrival, @RequestParam String departure ,@RequestParam String price, @RequestParam String flightTime){
+        Flight flight = new Flight(arrival, departure, Float.parseFloat(price),Float.parseFloat(flightTime));
+        flightService.addFlight(flight);
+        return "menuSection";
+
     }
 
 }
