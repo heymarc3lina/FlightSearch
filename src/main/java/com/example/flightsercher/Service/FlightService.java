@@ -31,4 +31,18 @@ public class FlightService {
     }
 
 
+    public Flight getFlightById(String id){
+       Flight flight =  flightRepository.findById(Long.parseLong(id)).orElse(null);
+       return flight;
+    }
+
+    public void updateFlight(String id, String arrival, String departure, String price, String time){
+        Flight flight = flightRepository.getOne(Long.parseLong(id));
+        flight.setArrival(arrival);
+        flight.setDeparture(departure);
+        flight.setPrice(Float.parseFloat(price));
+        flight.setFlightTime(Float.parseFloat(time));
+        this.flightRepository.saveAndFlush(flight);
+    }
+
 }

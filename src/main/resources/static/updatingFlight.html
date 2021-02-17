@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Updating flight</title>
+</head>
+<body>
+<h2>Second step to change data for flight</h2>
+<form action="/updatedFlight" method="post" >
+    <label for="arrival">Arrival:</label><br>
+    <input type="text" id="arrival" name="arrival" th:value="${flight.arrival}" ><br><br>
+    <label for="departure">Departure:</label><br>
+    <input  type="text" id="departure" name="departure"  th:value="${flight.departure}"><br><br>
+    <label for="price">Price:</label><br>
+    <input  type="text" id="price" name="price"  th:value="${flight.price}"><br><br>
+    <label for="flightTime">Flight time:</label><br>
+    <input  type="text" id="flightTime" name="flightTime" th:value="${flight.flightTime}" ><br><br>
+    <input  type="hidden" id="id" name="id" th:value="${flight.id}" >
+    <input type="submit" onclick="location.href='/flightSection/updatedFlight'"value="Submit"  >
+</form>
+<form action="/updateFlight" method="get">
+    <p><b>Note:</b> If you want  to chose different flight click here</p>
+    <input type="submit" onclick="location.href='/flightSection/updateFlight'" value="Back">
+</form>
+</body>
+</html>

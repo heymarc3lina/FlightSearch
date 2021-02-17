@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -66,6 +67,25 @@ public class FlightSection {
         return "updateFlight";
     }
 
+    @GetMapping("/updatingFlight")
+    public String updatingFlight(@RequestParam String flight, Model model){
+        if(flight.isEmpty() || flight == ""){
+            return "noExist";
+        }
+        Flight flightWithId = flightService.getFlightById(flight);
+        if(flightWithId == null){
+            return "noExist";
+        }
+        model.addAttribute("flight", flightWithId);
+        return "updatingFlight";
+    }
 
+    @PostMapping("/updatedFlight")
+    public String updatedFlight(@RequestParam String arrival, @RequestParam String departure ,@RequestParam String price,
+                                @RequestParam String flightTime, @RequestParam String id){
+        flightService.updateFlight(id,arrival,departure,price,flightTime);
+        return "menuSection";
+
+    }
 
 }
