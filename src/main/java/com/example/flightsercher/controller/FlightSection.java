@@ -60,4 +60,12 @@ public class FlightSection {
 
     }
 
+    @GetMapping("/updateFlight")
+    public String listFlightsToUpdateFlight(Model model){
+        model.addAttribute("flights", flightService.list());
+        return "updateFlight";
+    }
+
+
+
 }
