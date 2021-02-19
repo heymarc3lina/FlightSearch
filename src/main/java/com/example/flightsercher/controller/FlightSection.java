@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class FlightSection {
@@ -72,12 +73,14 @@ public class FlightSection {
         if(flight.isEmpty() || flight == ""){
             return "noExist";
         }
-        Flight flightWithId = flightService.getFlightById(flight);
-        if(flightWithId == null){
-            return "noExist";
+        Optional<Flight> flightWithId = flightService.getFlightById(flight);
+        if(flightWithId.isPresent()){
+            model.addAttribute("flight", flightWithId.get());
+
+            return "updatingFlight";
         }
-        model.addAttribute("flight", flightWithId);
-        return "updatingFlight";
+
+        return "noExist";
     }
 
     @PostMapping("/updatedFlight")
@@ -87,5 +90,29 @@ public class FlightSection {
         return "menuSection";
 
     }
+
+    @GetMapping("/deleteFlight")
+    public String listFlightsToDeleteFlight(Model model){
+        model.addAttribute("flights", flightService.list());
+        return "deleteFlight";
+    }
+
+    @GetMapping("/deletingFlight")
+    public String deletingFlight(@RequestParam String flight, Model model){
+        if(flight.isEmpty() || flight == ""){
+            return "noExist";
+        }
+        Optional<Flight> flightWithId = flightService.getFlightById(flight);
+        if(flightWithId.isPresent()){
+            if(flightService.deleteFlight(flightWithId.get())){
+                return "positiveResultOfDeleting";
+            }
+
+        }
+
+        return "badResultOdDeleting";
+    }
+
+
 
 }

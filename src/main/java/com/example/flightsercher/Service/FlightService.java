@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FlightService {
@@ -31,8 +32,9 @@ public class FlightService {
     }
 
 
-    public Flight getFlightById(String id){
-       Flight flight =  flightRepository.findById(Long.parseLong(id)).orElse(null);
+    public Optional<Flight> getFlightById(String id){
+       Optional<Flight> flight =  flightRepository.findById(Long.parseLong(id));
+
        return flight;
     }
 
@@ -43,6 +45,15 @@ public class FlightService {
         flight.setPrice(Float.parseFloat(price));
         flight.setFlightTime(Float.parseFloat(time));
         this.flightRepository.saveAndFlush(flight);
+    }
+
+    public boolean deleteFlight(Flight flight){
+       Long ammountOfFlight = flightRepository.count();
+        flightRepository.delete(flight);
+        if(ammountOfFlight -1 == flightRepository.count()){
+            return true;
+        }
+        return false;
     }
 
 }

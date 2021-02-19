@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Flights</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<h1>List of all flights</h1>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Arrival</th>
+        <th>Departure</th>
+        <th>Price</th>
+        <th>Flight time</th>
+    </tr>
+    <tr th:each="flight : ${flights}">
+        <td th:text="${flight.id}"></td>
+        <td th:text="${flight.arrival}"></td>
+        <td th:text="${flight.departure}"></td>
+        <td th:text="${flight.price}"></td>
+        <td th:text="${flight.flightTime}"></td>
+    </tr>
+</table>
+<body>
+
+<h2>Please chose flight's id to delete it</h2>
+
+<form action="/deletingFlight">
+    <input list="flights" name="flight">
+    <datalist id="flights" >
+        <option  th:each="flight : ${flights}" th:value="${flight.id}">
+
+    </datalist>
+    <input type="submit" onclick="location.href='/flightSection/deletingFlight'">
+</form>
+
+
+<p><b>Note:</b> The datalist tag is not supported in Safari prior version 12.1.</p>
+
+</body>
+</html>
